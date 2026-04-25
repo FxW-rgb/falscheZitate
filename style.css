@@ -1,0 +1,701 @@
+/* ═══════════════════════════════════════════════════
+   FALSCH ZUGEORDNET — Stylesheet
+   ───────────────────────────────────────────────────
+   Inhaltsverzeichnis
+   1.  Reset & CSS-Variablen
+   2.  Body & Layout
+   3.  SVG-Filter (versteckt)
+   4.  Karte
+   5.  Zitat & Autor
+   6.  Stempel
+   7.  Stempel-Animationen
+   8.  Statistik-Zeile
+   9.  Ratespiel
+   10. Aufdecken-Box
+   11. Buttons (Nächstes / Eigenes Zitat)
+   12. Fußnote & Attribution
+   13. Modal
+   14. Lade- & Fehler-Screens
+   15. Keyframe-Animationen
+═══════════════════════════════════════════════════ */
+
+
+/* ───────────────────────────────────────────────────
+   1. Reset & CSS-Variablen
+─────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+:root {
+  /* Farben */
+  --bg:     #D6CDB0;
+  --paper:  #F2E9D4;
+  --ink:    #1C1108;
+  --muted:  #6B5A3A;
+  --red:    #8B2020;
+  --blue:   #16305C;
+  --green:  #2A6640;
+  --border: #B8A87A;
+  --shadow: #A09060;
+
+  /* Schriften */
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-display: 'Special Elite', cursive;
+  --font-serif:   'Playfair Display', serif;
+
+  /* Abstände */
+  --card-width: 460px;
+}
+
+
+/* ───────────────────────────────────────────────────
+   2. Body & Layout
+─────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 60%, rgba(160, 140, 90, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 25%, rgba(140, 120, 70, 0.18) 0%, transparent 55%);
+  font-family: var(--font-mono);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px 44px;
+}
+
+
+/* ───────────────────────────────────────────────────
+   3. SVG-Filter (unsichtbar, nur für Stempel-Effekt)
+─────────────────────────────────────────────────── */
+
+.svg-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+
+/* ───────────────────────────────────────────────────
+   4. Karte
+─────────────────────────────────────────────────── */
+
+.card {
+  background: var(--paper);
+  width: 100%;
+  max-width: var(--card-width);
+  padding: 40px 30px 30px;
+  border: 1px solid var(--border);
+  box-shadow:
+    5px 5px 0 var(--shadow),
+    10px 10px 0 rgba(160, 144, 96, 0.18);
+  position: relative;
+  animation: cardIn 0.4s ease both;
+}
+
+/* Innerer Zierrahmen */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(184, 168, 130, 0.4);
+  pointer-events: none;
+}
+
+
+/* ───────────────────────────────────────────────────
+   5. Zitat & Autor
+─────────────────────────────────────────────────── */
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 4.2vw, 20px);
+  line-height: 1.78;
+  color: var(--ink);
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.author-eyebrow {
+  font-size: 7px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 4px;
+  opacity: 0.65;
+}
+
+.author-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 0 0 26px;
+}
+
+
+/* ───────────────────────────────────────────────────
+   6. Stempel
+─────────────────────────────────────────────────── */
+
+.stamps {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* Wrapper-Button (unsichtbar, nur klickbar) */
+.stamp {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 6px;
+  flex-shrink: 0;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.stamp:focus {
+  outline: none;
+}
+
+.stamp.unchosen {
+  pointer-events: none;
+}
+
+/* Sichtbarer Stempel-Körper */
+.stamp-body {
+  width: 140px;
+  height: 54px;
+  border: 3px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  filter: url(#ink);           /* Tintentextur via SVG-Filter */
+  transition: opacity 0.18s;
+}
+
+/* Innerer Zierrahmen des Stempels */
+.stamp-body::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1.5px solid currentColor;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.stamp-text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 8px;
+}
+
+/* Farben & Grundrotation */
+.stamp.funny    { color: var(--red); }
+.stamp.notfunny { color: var(--blue); }
+
+.stamp.funny    .stamp-body { transform: rotate(-5deg);   opacity: 0.60; }
+.stamp.notfunny .stamp-body { transform: rotate(3.5deg);  opacity: 0.60; }
+
+/* Hover */
+.stamp:hover:not(.unchosen) .stamp-body { opacity: 0.82; }
+
+/* Ausgewählt */
+.stamp.chosen .stamp-body {
+  opacity: 1;
+  filter: url(#ink-sharp);
+}
+
+.stamp.funny.chosen    .stamp-body { box-shadow: 3px 3px 16px rgba(139, 32, 32, 0.22); }
+.stamp.notfunny.chosen .stamp-body { box-shadow: 3px 3px 16px rgba(22, 48, 92, 0.22); }
+
+/* Nicht ausgewählt */
+.stamp.unchosen .stamp-body { opacity: 0.11; }
+
+/* Tinte-Splash-Ring nach dem Aufprall */
+.stamp.impact::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 2px solid currentColor;
+  opacity: 0;
+  animation: ink-ring 0.55s ease forwards;
+  pointer-events: none;
+}
+
+
+/* ───────────────────────────────────────────────────
+   7. Stempel-Animationen
+─────────────────────────────────────────────────── */
+
+.stamp.funny.impact .stamp-body {
+  animation: stamp-funny 0.52s cubic-bezier(0.22, 0.68, 0, 1.15) forwards;
+}
+
+.stamp.notfunny.impact .stamp-body {
+  animation: stamp-notfunny 0.52s cubic-bezier(0.22, 0.68, 0, 1.15) forwards;
+}
+
+
+/* ───────────────────────────────────────────────────
+   8. Statistik-Zeile
+─────────────────────────────────────────────────── */
+
+.stats-line {
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 18px;
+  animation: fadeUp 0.4s ease both;
+}
+
+
+/* ───────────────────────────────────────────────────
+   9. Ratespiel
+─────────────────────────────────────────────────── */
+
+.guess-area {
+  padding-top: 2px;
+}
+
+.guess-prompt {
+  font-size: 8px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 14px;
+  opacity: 0.75;
+}
+
+.guess-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.guess-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  min-width: 0;
+}
+
+.guess-input::placeholder {
+  color: rgba(107, 90, 58, 0.32);
+  font-style: italic;
+}
+
+.reveal-btn {
+  background: transparent;
+  border: 1px solid var(--muted);
+  padding: 8px 13px;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.reveal-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+
+/* ───────────────────────────────────────────────────
+   10. Aufdecken-Box
+─────────────────────────────────────────────────── */
+
+.reveal-result {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  text-align: center;
+  animation: fadeUp 0.4s ease both;
+}
+
+.reveal-label {
+  font-size: 7.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+  opacity: 0.65;
+}
+
+.reveal-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.reveal-source {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 0.4px;
+}
+
+.guess-verdict {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 11px;
+  font-family: var(--font-mono);
+}
+
+.verdict-correct { color: var(--green); }
+.verdict-wrong   { color: var(--red); }
+
+
+/* ───────────────────────────────────────────────────
+   11. Buttons (Nächstes / Eigenes Zitat)
+─────────────────────────────────────────────────── */
+
+.btn-next {
+  width: 100%;
+  max-width: var(--card-width);
+  margin-top: 18px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-next:hover { opacity: 0.78; }
+
+.btn-add {
+  width: 100%;
+  max-width: var(--card-width);
+  margin-top: 9px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+
+/* ───────────────────────────────────────────────────
+   12. Fußnote & Attribution
+─────────────────────────────────────────────────── */
+
+.quote-count {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-top: 13px;
+  text-align: center;
+  opacity: 0.55;
+}
+
+.attribution {
+  font-size: 7.5px;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-top: 6px;
+  text-align: center;
+  opacity: 0.48;
+  max-width: 340px;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+
+/* ───────────────────────────────────────────────────
+   13. Modal
+─────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 17, 8, 0.6);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease both;
+}
+
+.modal {
+  background: var(--paper);
+  padding: 30px 26px 24px;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid var(--border);
+  box-shadow: 6px 6px 0 var(--shadow);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+
+.field-label {
+  font-size: 7.5px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5px;
+  opacity: 0.72;
+}
+
+.modal-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 18px;
+  outline: none;
+  display: block;
+}
+
+textarea.modal-input {
+  resize: none;
+  min-height: 70px;
+}
+
+.modal-input::placeholder {
+  color: rgba(107, 90, 58, 0.35);
+  font-style: italic;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  flex: 2;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 13px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover    { opacity: 0.78; }
+.btn-primary:disabled { opacity: 0.3; cursor: default; }
+
+.btn-secondary {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 13px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* Status-Meldungen im Modal */
+.save-status {
+  font-size: 8.5px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  margin-top: 10px;
+  padding: 9px;
+  text-transform: uppercase;
+  animation: fadeIn 0.2s ease both;
+}
+
+.save-status.loading { color: var(--muted); border: 1px dashed var(--border); }
+.save-status.ok      { color: var(--green); border: 1px dashed var(--green); }
+.save-status.err     { color: var(--red);   border: 1px dashed var(--red); }
+
+.modal-note {
+  font-size: 7.5px;
+  color: var(--muted);
+  margin-top: 13px;
+  opacity: 0.62;
+  line-height: 1.65;
+  letter-spacing: 0.4px;
+}
+
+
+/* ───────────────────────────────────────────────────
+   14. Lade- & Fehler-Screens
+─────────────────────────────────────────────────── */
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--border);
+  border-top-color: var(--muted);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+.loading-text {
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 340px;
+  text-align: center;
+}
+
+.error-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.error-msg {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.error-hint {
+  font-size: 8px;
+  color: var(--muted);
+  opacity: 0.55;
+  line-height: 1.6;
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+  width: 100%;
+}
+
+
+/* ───────────────────────────────────────────────────
+   15. Keyframe-Animationen
+─────────────────────────────────────────────────── */
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stamp-funny {
+  0%   { transform: rotate(-5deg) translateY(-20px) scale(1.1); opacity: 0.25; }
+  50%  { transform: rotate(-5deg) translateY(3px)   scale(0.95); opacity: 1; }
+  70%  { transform: rotate(-5deg) scale(1.02); }
+  100% { transform: rotate(-5deg) scale(1); }
+}
+
+@keyframes stamp-notfunny {
+  0%   { transform: rotate(3.5deg) translateY(-20px) scale(1.1); opacity: 0.25; }
+  50%  { transform: rotate(3.5deg) translateY(3px)   scale(0.95); opacity: 1; }
+  70%  { transform: rotate(3.5deg) scale(1.02); }
+  100% { transform: rotate(3.5deg) scale(1); }
+}
+
+@keyframes ink-ring {
+  0%   { opacity: 0.45; transform: scale(0.85); }
+  100% { opacity: 0;    transform: scale(1.55); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
