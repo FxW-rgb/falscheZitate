@@ -8,15 +8,9 @@ const { useState, useEffect, useCallback } = React;
 
 // ───────────────────────────────────────────────────
 //  KONFIGURATION
-//  ▼▼▼ HIER die Apps Script URL eintragen ▼▼▼
 // ───────────────────────────────────────────────────
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPOVUPZHd8sueDoyY0b7H4LsE9MjDNAdtOd-OOA79j8ELZRmnx9uBgtpSZ1DEr6ouj/exec";
-
-//  ▲▲▲ Nur diese eine Zeile anpassen ▲▲▲
-//  Die URL bekommst du beim Deployen des Google Apps Scripts.
-//  Sie sieht so aus: https://script.google.com/macros/s/XXXX/exec
-
 
 // ───────────────────────────────────────────────────
 //  LOKALER SPEICHER
@@ -419,8 +413,8 @@ function App() {
 
       <p className="quote-count">{quotes.length} Zitate im Archiv</p>
       <p className="attribution">
-        Falsch zugeordnete Zitate —<br />
-        auf Grundlage von und in Anlehnung an das Känguru.
+        Falsch zugeordnete Zitate auf Grundlage von und in Anlehnung an das Känguru.<br />
+        <a href="anmerkungenhtml">Anmerkungen des Seiten-Erstellers</a>
       </p>
 
       {/* ── Modal: Eigenes Zitat einreichen ── */}

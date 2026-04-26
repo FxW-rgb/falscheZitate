@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anmerkungen des Seiten-Erstellers</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playfair+Display:ital,wght@0,400;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Zusätzliche Stile nur für diese Seite */
+
+    .imprint-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 16px 60px;
+    }
+
+    .imprint-card {
+      background: var(--paper);
+      width: 100%;
+      max-width: 560px;
+      padding: 44px 36px 36px;
+      border: 1px solid var(--border);
+      box-shadow: 5px 5px 0 var(--shadow);
+      position: relative;
+    }
+
+    .imprint-card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(184, 168, 130, 0.4);
+      pointer-events: none;
+    }
+
+    .imprint-headline {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--ink);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .imprint-section {
+      margin-bottom: 28px;
+    }
+
+    .imprint-section-title {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      opacity: 0.75;
+    }
+
+    .imprint-section p {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    .imprint-section p + p {
+      margin-top: 8px;
+    }
+
+    .imprint-divider {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 24px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .back-link:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="imprint-page">
+    <div class="imprint-card">
+
+      <h1 class="imprint-headline">Anmerkungen des Seiten-Erstellers</h1>
+
+      <!-- ── Zweck & Charakter ── -->
+      <div class="imprint-section">
+        <p class="imprint-section-title">Disclaimer</p>
+        <p>
+          Die Welt ist nicht fair. Das findet auch das Känguru. Und ruft zur Rebellion auf. 
+          Wir finden: guter Punkt.
+        </p>
+        <p>
+          Eine seiner besseren Ideen (neben Tofu, Sprengstoff und überzogenen Mietstreiks): falsch zugeordnete Zitate.
+          Warum? Weil Informationen Macht haben. Und die Bedeutung von Kontext immer offensichtlicher wird.
+          So kann beides zusammen ziemlich leicht zur „Wirklichkeit“ werden, wenn genug Leute gleichzeitig nicken.
+        </p>
+        <p>
+          Genau da setzen falsch zugeordnete Zitate an. Aber anders als es klingt:
+          Sie sollen keine Fake News verbreiten und auch keine Fake World erschaffen. Im Gegenteil.
+          Die Verfremdung soll sichtbar machen, was so alles schief läuft und dabei aber auch aufzeigen, wie leicht Realität verzerrt werden kann. 
+          Das Ziel ist eine bessere Welt. Aber eine reale. Keine Parallelwirklichkeit, kein Unsinn, der sich selbst für Wahrheit hält.
+          Transparenz gehört deshalb dazu: Zitate und Ideen werden, soweit möglich, mit ihren ursprünglichen Quellen gekennzeichnet. 
+          (Auch als kleiner Service für alle, die den Witz sonst vielleicht verpassen würden.)
+        </p>
+        <p>
+          Diese Website ist ein rein privates, nicht-kommerzielles Freizeitprojekt
+          ohne wirtschaftliche Absicht. Es wird keine Werbung geschaltet,
+          kein Produkt verkauft und kein Entgelt erhoben.
+        </p>
+      </div>
+
+      <hr class="imprint-divider" />
+
+      <!-- ── Urheberrecht & Quellenangabe ── -->
+      <div class="imprint-section">
+        <p class="imprint-section-title">Urheberrecht & Quellenangabe</p>
+        <p>
+          Die auf dieser Website gezeigten Zitate sind inspiriert vom Känguru. Oder MArc Uwe Kling. Wer weiß das schon so genau.
+          Angelehnt sind die Inhalte auf jedenfall an die Werke von <em>Marc-Uwe Kling</em>, insbesondere
+          die „Känguru-Chroniken" (Ullstein Verlag).
+        </p>
+        <p>
+          Diese Seite steht in keiner Verbindung zum Autor oder Verlag.
+          Die Zitate werden aus privater Begeisterung für das Werk zitiert
+          und bewusst falsch zugeordnet. Als humoristische Hommage,
+          nicht als Behauptung tatsächlicher Autorschaft.
+        </p>
+        <p>
+          Sollte ein Rechteinhaber die Entfernung bestimmter Inhalte wünschen,
+          genügt eine formlose E-Mail an die unten genannte Adresse.
+        </p>
+      </div>
+
+      <hr class="imprint-divider" />
+
+      <!-- ── Haftungsausschluss ── -->
+      <div class="imprint-section">
+        <p class="imprint-section-title">Haftungsausschluss</p>
+        <p>
+          Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt.
+          Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+          wird keine Gewähr übernommen.
+        </p>
+        <p>
+          Von Nutzern eingetragene Zitate geben ausschließlich deren Meinung
+          wieder. Der Betreiber behält sich vor, unangemessene Inhalte
+          ohne Angabe von Gründen zu entfernen.
+        </p>
+      </div>
+
+      <hr class="imprint-divider" />
+
+      <!-- ── Datenschutz ── -->
+      <div class="imprint-section">
+        <p class="imprint-section-title">Datenschutz</p>
+        <p>
+          Diese Website speichert keine personenbezogenen Daten.
+          Im Browser wird lediglich gespeichert, ob du ein Zitat
+          bereits bewertet hast (kein Name, keine IP-Adresse).
+        </p>
+        <p>
+          Zitate und Bewertungen werden anonym in einem
+          Google Spreadsheet gespeichert. Es findet kein Tracking
+          und keine Weitergabe an Dritte statt.
+        </p>
+      </div>
+      
+<!-- ── Angaben zur Person ── -->
+      <div class="imprint-section">
+        <p class="imprint-section-title">Angaben gemäß § 5 TMG</p>
+        <p>
+          Felix Wiendl<br />
+          Faber-Castell-Straße 7<br />
+          93197 Zeitlarn
+        </p>
+        <p>
+          Kontakt: falschezitate@riseup.net.de
+        </p>
+      </div>
+
+      <hr class="imprint-divider" />
+
+    </div>
+
+    <!-- Zurück-Link -->
+    <a class="back-link" href="index.html">← Zurück zu den Zitaten</a>
+
+  </div>
+
+</body>
+</html>
