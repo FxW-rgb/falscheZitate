@@ -414,7 +414,7 @@ function App() {
       <p className="quote-count">{quotes.length} Zitate im Archiv</p>
       <p className="attribution">
         Falsch zugeordnete Zitate auf Grundlage von und in Anlehnung an das Känguru.<br />
-        <a href="anmerkungenhtml">Anmerkungen des Seiten-Erstellers</a>
+        <a href="anmerkungen.html">Anmerkungen des Seiten-Erstellers</a>
       </p>
 
       {/* ── Modal: Eigenes Zitat einreichen ── */}
