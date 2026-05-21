@@ -11,7 +11,7 @@ const { useState, useEffect, useCallback } = React;
 //  ▼▼▼ HIER die Apps Script URL eintragen ▼▼▼
 // ───────────────────────────────────────────────────
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPOVUPZHd8sueDoyY0b7H4LsE9MjDNAdtOd-OOA79j8ELZRmnx9uBgtpSZ1DEr6ouj/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpxJHQexF0z8eoE4AVJn6ctu4a3Xb2Ul5U9hR1PUct91dvIDUFD2u6ufgoyd7vAgNl/exec";
 
 //  ▲▲▲ Nur diese eine Zeile anpassen ▲▲▲
 //  Die URL bekommst du beim Deployen des Google Apps Scripts.
