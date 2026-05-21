@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   FALSCH ZUGEORDNET — Stylesheet
+   Falsche Zitate — Stylesheet
    ───────────────────────────────────────────────────
    Inhaltsverzeichnis
    1.  Reset & CSS-Variablen
@@ -464,19 +464,6 @@ body {
   max-width: 340px;
   line-height: 1.65;
   font-style: italic;
-}
-
-.attribution a {
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  font-style: normal;
-  letter-spacing: 1px;
-  transition: opacity 0.15s;
-}
-
-.attribution a:hover {
-  opacity: 1;
 }
 
 

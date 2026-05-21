@@ -1,6 +1,5 @@
 // ═══════════════════════════════════════════════════
-//  FALSCH ZUGEORDNET — App-Logik
-//  app.js
+//  FalscheZitate — Java Skript App-Logik
 // ═══════════════════════════════════════════════════
 
 const { useState, useEffect, useCallback } = React;
@@ -8,14 +7,10 @@ const { useState, useEffect, useCallback } = React;
 
 // ───────────────────────────────────────────────────
 //  KONFIGURATION
-//  ▼▼▼ HIER die Apps Script URL eintragen ▼▼▼
+//  Verweis auf das Google Apps Scipt Backend
 // ───────────────────────────────────────────────────
 
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpxJHQexF0z8eoE4AVJn6ctu4a3Xb2Ul5U9hR1PUct91dvIDUFD2u6ufgoyd7vAgNl/exec";
-
-//  ▲▲▲ Nur diese eine Zeile anpassen ▲▲▲
-//  Die URL bekommst du beim Deployen des Google Apps Scripts.
-//  Sie sieht so aus: https://script.google.com/macros/s/XXXX/exec
 
 
 // ───────────────────────────────────────────────────
@@ -50,7 +45,7 @@ async function apiLoad() {
   if (!res.ok) throw new Error("HTTP " + res.status);
   const data = await res.json();
   if (!data.ok) throw new Error(data.error || "Unbekannter Fehler");
-  return data; // { quotes: [...], ratings: {...} }
+  return data;
 }
 
 // Neues Zitat oder Bewertung speichern
