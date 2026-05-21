@@ -10,7 +10,7 @@ const { useState, useEffect, useCallback } = React;
 //  Verweis auf das Google Apps Scipt Backend
 // ───────────────────────────────────────────────────
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpxJHQexF0z8eoE4AVJn6ctu4a3Xb2Ul5U9hR1PUct91dvIDUFD2u6ufgoyd7vAgNl/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyh0t8gs9Q7EO5FWZBornGxvhKfDAI02Dfq5lKv_wyIDx4owQQYUlZm2oLTyXA2ew5o/exec";
 
 
 // ───────────────────────────────────────────────────
